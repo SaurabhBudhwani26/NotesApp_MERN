@@ -1,0 +1,24 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "audit": "^0.0.6",
+    "bcryptjs": "^2.4.3",
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1",
+    "jsonwebtoken": "^9.0.1",
+    "mongoose": "^7.3.1",
+    "nom": "^0.0.3",
+    "Router": "^2.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.14.9"
+  }
+}
