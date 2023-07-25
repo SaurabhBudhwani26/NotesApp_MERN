@@ -12,5 +12,5 @@ app.use('/auth', require('./routes/auth'))
 app.use('/notes', require('./routes/notes'))
 
 app.listen(port, ()=>{
-    console.log(`app listening at localhost:${port}`)
+    console.log(`NotesBook listening at localhost:${port}`)
 })
