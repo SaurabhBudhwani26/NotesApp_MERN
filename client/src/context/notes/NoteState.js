@@ -38,21 +38,22 @@ const NoteState = (props) => {
       body: JSON.stringify({title, description, tag}),
     });
 
-    const note = {
-      _id: "764bf9b1b1c3f86231a9a32dbd",
-      user: "64ad5148c6e014de4e4f6768",
-      title: title,
-      description: description,
-      tag: tag,
-      date: "2023-07-25T09:51:23.917Z",
-      __v: 0,
-    };
-
-    setNotes(notes.concat(note));
+    const note = await response.json()
+    setNotes(notes.concat(note));  
   };
 
   //Deleteing a note
-  const deleteNote = (id) => {
+  const deleteNote = async (id) => {
+    let url = `${host}/notes/deletenote/${id}`;
+    
+    const response = await fetch(url, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "authToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRhZDUxNDhjNmUwMTRkZTRlNGY2NzY4In0sImlhdCI6MTY4OTE2MTQxN30.oX-YZDH7wQVOMp8u385EQTohC5sascs5F56AeX6-C1w",
+      }
+    });
+
     let newNotes = notes.filter((note) => {
       return note._id !== id;
     });
@@ -62,18 +63,22 @@ const NoteState = (props) => {
   //Editing a note
   const editNote = async (id, title, description, tag) => {
     let url = `${host}/notes/updatenote/${id}`;
-    for (let i =0; i<notes.length; i++){
-      const element = notes[i];
+    let newNotes = JSON.parse(JSON.stringify(notes))
+    for (let i =0; i<newNotes.length; i++){
+      const element = newNotes[i];
 
       if(element._id ===  id){
-        element.title = title
-        element.description = description
-        element.tag = tag
+        newNotes[i].title = title
+        newNotes[i].description = description
+        newNotes[i].tag = tag
+        break;
       }
+      
     }
+    setNotes(newNotes)
 
     const response = await fetch(url, {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
         "authToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRhZDUxNDhjNmUwMTRkZTRlNGY2NzY4In0sImlhdCI6MTY4OTE2MTQxN30.oX-YZDH7wQVOMp8u385EQTohC5sascs5F56AeX6-C1w",

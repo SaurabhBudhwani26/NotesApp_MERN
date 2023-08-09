@@ -22,6 +22,9 @@ export default function NavBar() {
         </li>
         
       </ul>
+
+      <Link className="btn btn-primary mx-1" to='/login'>Login</Link>
+      <Link className="btn btn-primary mx-1" to='/signup'>Signup</Link>
       
     </div>
   </div>
